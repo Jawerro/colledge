@@ -1,0 +1,21 @@
+{% extends 'layout/basic.html' %}
+{% block title %}блюда{% endblock%}
+
+{% block content %}
+<table class="t1" border: 5px #000>
+        <caption><b>Продукты</b></caption>
+            <tr><th>Продукт</th><th>Стоимость</th><th>Поставщик</th><th>Серия</th></tr>
+            {% if products %}
+            {% for product in products %}                
+                <tr>
+                    <td><a href="{% url 'kitchen:edit_product' product.pk %} ">{{ product.product }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>{{  product.deployer }}</td>                    
+                </tr>       
+            {% endfor %}
+            {% endif %}
+<p><a href="{% url 'kitchen:index' %}">На главную</a>
+   <a href = "{% url 'kitchen:add_product' %}">Добавить продукт</a>
+   
+</p>       
+{% endblock %}

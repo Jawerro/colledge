@@ -1,0 +1,19 @@
+{% extends 'layout/basic.html' %}
+{% block title %}{{ Product.name }} {% endblock%}
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Сохранить</button> 
+</form>
+<p></p><p></p><p></p>
+<button>
+    <form action="{% url 'kitchen:delete_product' pk=product.pk %}" method="POST">
+        {% csrf_token %}
+        <input class="btn danger" type="submit" value="Удалить"/>
+    </form>
+</button>
+<p><a href="{% url 'kitchen:table_products' %}">Назад</a></p>
+<p><a href="{% url 'kitchen:index' %}">На главную</a></p>
+    
+{% endblock %}

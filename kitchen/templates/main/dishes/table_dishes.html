@@ -1,0 +1,20 @@
+{% extends 'layout/basic.html' %}
+{% block title %}блюда{% endblock%}
+
+{% block content %}
+<table class="t1" border: 5px #000>
+        <caption><b>Блюда</b></caption>
+            <tr><th>Блюдо</th><th>Тип</th>
+            {% if dishes %}
+            {% for dish in dishes %}                
+                <tr>
+                    <td><a href="{% url 'kitchen:edit_dish' dish.pk %} ">{{ dish.dish }}</td>
+                    <td>{{ dish.type }}</td>                                       
+                </tr>       
+            {% endfor %}
+            {% endif %}
+<p><a href="{% url 'kitchen:index' %}">На главную</a>
+   <a href = "{% url 'kitchen:add_dish' %}">Добавить блюдо</a>
+   
+</p>       
+{% endblock %}
