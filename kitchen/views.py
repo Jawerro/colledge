@@ -4,16 +4,20 @@ from django.views import generic
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
+from rest_framework import viewsets
 
 from .models import Product, Dish
 from .forms import DishForm
+from .serializers import ProductSerializer, DishSerializer
 
 
 def index(request):
     return render(request, 'main/index.html')
 
 
-
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all().order_by('product')
+    seerializer_class = ProductSerializer
 
 
 class ProductEditView(generic.UpdateView):

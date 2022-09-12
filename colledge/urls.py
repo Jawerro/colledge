@@ -1,7 +1,10 @@
 from django.contrib import admin
 from django.urls import path, include
 
+
+
 urlpatterns = [
-    path('', include('kitchen.urls')),
+    path('api/v1/', include('kitchen.urls')),
     path('admin/', admin.site.urls),
+    
 ]
