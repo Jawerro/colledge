@@ -17,7 +17,7 @@ def index(request):
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all().order_by('product')
-    seerializer_class = ProductSerializer
+    serializer_class = ProductSerializer
 
 
 class ProductEditView(generic.UpdateView):

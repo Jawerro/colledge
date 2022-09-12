@@ -7,7 +7,7 @@ from .views import ProductView, ProductAddView, ProductEditView,  ProductDeleteV
 from .views import  DishView, DishAddView, DishEditView, DishDeleteView
 
 router = routers.DefaultRouter()
-router.register(r'products', views.ProductViewSet)
+router.register('products', views.ProductViewSet)
 urlpatterns = router.urls
 
 
