@@ -1,35 +1,33 @@
-<template lang="pug">
-#app
-    section.container.grid-960
-      .columns
-        .column.col-2
-        .column.col-8.col-md-12
-          header.text-center
-            h2 Create product
-              create-product
-          header.text-center
-            h2 List of products
-              product-list
-        .column.col-2
+<template>
+  <div id="app">
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/create">Add Product</router-link> |
+      <router-link to="/about">About</router-link>
+    </div>
+    <router-view/>
+  </div>
 </template>
+
 <script>
-import CreateProduct from './components/CreateProduct'
-import ProductList from './components/ProductList'
+import Product from '../src/components/ProductList.vue'
 export default {
-  name: 'app',
+  name: 'App',
   components: {
-    'create-product': CreateProduct,
-    'product-list': ProductList
+    Product
   }
 }
 </script>
 <style>
-  @import url(https://fonts.googleapis.com/css?family=Eczar);
-  @import url(https://fonts.googleapis.com/css?family=Work+Sans);
-  body {
-    font-family: "Work Sans", "Segoe UI", "Helvetica Neue", sans-serif;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    font-family: "Eczar", sans-serif;
-  }
+*{
+  margin: 0px;
+  padding: 0px;
+}
+body{
+  background-color: #fcfcfc;
+  text-align: center;
+}
+#nav {
+    margin: 20px 0;
+}
 </style>

@@ -1,10 +1,12 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.views import generic
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from rest_framework import viewsets
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.parsers import JSONParser
 
 from .models import Product, Dish
 from .forms import DishForm
@@ -15,9 +17,26 @@ def index(request):
     return render(request, 'main/index.html')
 
 
-class ProductViewSet(viewsets.ModelViewSet):
-    queryset = Product.objects.all().order_by('product')
-    serializer_class = ProductSerializer
+@csrf_exempt
+def products_list(request):
+    
+    if request.method == 'GET':
+        products = Product.objects.all()
+        serializer = ProductSerializer(products, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        print(request)
+        print(data)
+        serializer = ProductSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+
+# class ProductViewSet(viewsets.ModelViewSet):
+#     queryset = Product.objects.all().order_by('product')
+#     serializer_class = ProductSerializer
 
 
 class ProductEditView(generic.UpdateView):
